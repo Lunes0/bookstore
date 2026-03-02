@@ -21,6 +21,11 @@ class ProductSerializer(serializers.ModelSerializer):
             "category",
             "categories_ids",
         ]
+        extra_kwargs = {
+            "description": {"required": False},
+            "category": {"required": False},
+            "categories_ids": {"required": False},
+        }
 
     def create(self, validated_data):
         category_data = validated_data.pop("categories_ids")
