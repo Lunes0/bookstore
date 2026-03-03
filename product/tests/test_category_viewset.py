@@ -20,8 +20,8 @@ class CategoryViewSet(APITestCase):
         url = reverse("category-list", kwargs={"version": "v1"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        category_data = json.loads(response.content)[0]
-        self.assertEqual(category_data["title"], self.category.title)
+        category_data = json.loads(response.content)
+        self.assertEqual(category_data["results"][0]["title"], self.category.title)
 
     def test_create_category(self):
         data = json.dumps(
