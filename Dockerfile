@@ -21,6 +21,7 @@ RUN apt-get update \
         build-essential \
         libpq-dev \
         gcc \
+    && pip install psycopg2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
