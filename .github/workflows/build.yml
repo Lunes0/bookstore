@@ -13,23 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install Poetry ${{ matrix.poetry-version }}
         run: |
-          python -m ensurepip
           python -m pip install --upgrade pip
           pip install poetry==${{ matrix.poetry-version }}
-      - name: View poetry --help
-        run: poetry --help
+
       - name: Install dependencies
         shell: bash
         run: |
-          python -m poetry install
+          poetry install
 
       - name: Run tests
+        env:
+          SECRET_KEY: "test_key"
+          DEBUG: 1
+          DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1"
+          SQL_ENGINE: "django.db.backends.sqlite3"
+          SQL_DATABASE: "db.sqlite3"
         run: |
           poetry run python manage.py test
