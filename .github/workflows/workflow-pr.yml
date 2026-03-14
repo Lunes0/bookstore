@@ -1,4 +1,7 @@
-qa:
+name: PR Workflow
+on: [pull_request]
+jobs:
+  qa:
   name: Quality check
   runs-on: ubuntu-latest
   steps:
