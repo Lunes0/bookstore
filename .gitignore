@@ -210,3 +210,4 @@ __marimo__/
 __pycache__
 *.pyc
 db.sqlite3
+env.dev
